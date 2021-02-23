@@ -15,7 +15,7 @@ export default class Signin extends Component {
       }
 
       handleSubmit = event =>{
-        
+        var mailPattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         event.preventDefault();
         console.log(this.state)
         let errMsg = ""
@@ -23,7 +23,10 @@ export default class Signin extends Component {
             // alert(1);
             errMsg = "Email ID is required"
             this.setState({errMsg});
-        }else if(this.state.password == ""){
+        }else if(!this.state.email.match(mailPattern)){
+            errMsg = "Email ID is not valid"
+            this.setState({errMsg})
+          }else if(this.state.password == ""){
             // alert(2)
             errMsg = "Password is required"
             this.setState({errMsg});

@@ -12,7 +12,7 @@ export default class Signup extends Component {
         this.onChangeHandler = this.onChangeHandler.bind(this)
       }
       handleRegSubmit = event =>{
-        
+        var mailPattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         event.preventDefault();
         console.log(this.state)
         let errMsg = ""
@@ -21,6 +21,9 @@ export default class Signup extends Component {
           this.setState({errMsg})
         }else if(this.state.email == ""){
           errMsg = "Email is required"
+          this.setState({errMsg})
+        }else if(!this.state.email.match(mailPattern)){
+          errMsg = "Email ID is not valid"
           this.setState({errMsg})
         }else if(this.state.password == ""){
           errMsg = "Password is required"
